@@ -144,7 +144,7 @@ namespace Disconnected_Environment
             string statusMahasiswa = cbxstatusM.Text;
             string tahunMasuk = cbxTahunma.Text;
             int count = 0;
-            string tempKodeStatus = "";
+           // string tempKodeStatus = "";
             string KodeStatus = "";
             koneksi.Open();
 
@@ -160,8 +160,8 @@ namespace Disconnected_Environment
             {
                 string queryString = "select Max(id_status) from dbo.status_mahasiswa";
                 SqlCommand cmStatusMahasisuaSum = new SqlCommand(queryString,koneksi);
-                int totalStatusMahasiswa = (int)cmStatusMahasisuaSum.ExecuteScalar();
-                int finalKodeStatusInt = totalStatusMahasiswa + 1;
+                string totalStatusMahasiswa = (string)cmStatusMahasisuaSum.ExecuteScalar();
+                string finalKodeStatusInt = totalStatusMahasiswa + 1;
                 KodeStatus = Convert.ToString(finalKodeStatusInt);
             }
 

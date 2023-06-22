@@ -88,6 +88,12 @@
             // cbxTahunma
             // 
             this.cbxTahunma.FormattingEnabled = true;
+            this.cbxTahunma.Items.AddRange(new object[] {
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022"});
             this.cbxTahunma.Location = new System.Drawing.Point(314, 356);
             this.cbxTahunma.Name = "cbxTahunma";
             this.cbxTahunma.Size = new System.Drawing.Size(179, 28);
@@ -96,6 +102,9 @@
             // cbxstatusM
             // 
             this.cbxstatusM.FormattingEnabled = true;
+            this.cbxstatusM.Items.AddRange(new object[] {
+            "Active",
+            "Inactive"});
             this.cbxstatusM.Location = new System.Drawing.Point(314, 317);
             this.cbxstatusM.Name = "cbxstatusM";
             this.cbxstatusM.Size = new System.Drawing.Size(179, 28);
