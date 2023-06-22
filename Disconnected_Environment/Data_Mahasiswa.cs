@@ -44,9 +44,7 @@ namespace Disconnected_Environment
                 new Binding("Text", this.customersBindingSource, "nama_mahasiswa", true));
             this.txtAlamat.DataBindings.Add(
                 new Binding("Text", this.customersBindingSource, "alamat", true));
-            BindingContext bindingContext = new BindingContext();
-            cbxJenis.BindingContext = bindingContext;
-            this.cbxJenis.DataBindings.Add(new Binding("Text", this.customersBindingSource, "jenis_kel", true));
+            this.cbxJenis.DataBindings.Add(new Binding("Text", this.customersBindingSource, "jenis_kelamin", true));
             this.dtTanggalL.DataBindings.Add(new Binding("text", this.customersBindingSource, "tgl_lahir", true));
             this.cbxProdi.DataBindings.Add(new Binding("Text", this.customersBindingSource, "nama_prodi", true));
             koneksi.Close();
@@ -76,7 +74,7 @@ namespace Disconnected_Environment
             alamat = txtAlamat.Text;
             tgl = dtTanggalL.Value;
             prodi = cbxProdi.Text;
-            int hs = 0;
+            string hs = string.Empty;
 
             koneksi.Open();
             string strs = "SELECT  id_prodi from dbo.Prodi where nama_prodi = @dd";
@@ -87,7 +85,7 @@ namespace Disconnected_Environment
             SqlDataReader dr = cm.ExecuteReader();
             while (dr.Read())
             {
-                hs = int.Parse(dr["id_prodi"].ToString());
+                hs = dr["id_prodi"].ToString();
             }
             dr.Close();
             string str = "INSERT INTO mahasiswa (nim, nama_mahasiswa, jenis_kelamin, alamat, tgl_lahir, id_prodi) VALUES (@NIM, @Nm, @JK, @AL, @Tgll, @Idp)";

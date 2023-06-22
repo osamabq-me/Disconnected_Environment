@@ -251,6 +251,9 @@
             // cbxJenis
             // 
             this.cbxJenis.FormattingEnabled = true;
+            this.cbxJenis.Items.AddRange(new object[] {
+            "M",
+            "F"});
             this.cbxJenis.Location = new System.Drawing.Point(354, 173);
             this.cbxJenis.Name = "cbxJenis";
             this.cbxJenis.Size = new System.Drawing.Size(121, 28);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -77,6 +78,20 @@ namespace Disconnected_Environment
             this.Hide();
         }
 
+        static string GenerateRandomNonRepetitiveString(int size)
+        {
+            Random random = new Random();
+            const string chars = "0123456789abcdef";
+            char[] hexChars = new char[size];
+
+            for (int i = 0; i < size; i++)
+            {
+                hexChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            return new string(hexChars);
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             string nmprodi = nmp.Text;
@@ -88,17 +103,23 @@ namespace Disconnected_Environment
             else
             {
                 koneksi.Open();
-                string str = "INSERT INTO dbo.prodi (nama_prodi) " + "VALUES(@id)";
-                SqlCommand cmd = new SqlCommand(str, koneksi);
-                cmd.CommandType = CommandType.Text;
-                cmd.Parameters.Add(new SqlParameter("id", nmprodi));
-                cmd.ExecuteNonQuery();
+                string randomCode = GenerateRandomNonRepetitiveString(5);
 
+
+                string str = "INSERT INTO dbo.prodi (id_prodi,nama_prodi) " + "VALUES(@randomcode,@id)";
+                using (SqlCommand command = new SqlCommand(str, koneksi))
+                {
+                    command.Parameters.Add("@randomcode", SqlDbType.VarChar).Value = randomCode;
+                    command.Parameters.Add("@id", SqlDbType.VarChar).Value = nmprodi;
+                    command.ExecuteNonQuery();
+                }
 
                 koneksi.Close();
                 MessageBox.Show("Data Have been added", "sucsses", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridView();
                 refreshform();
+
+
 
             }
         }
